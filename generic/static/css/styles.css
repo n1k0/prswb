@@ -256,7 +256,7 @@ ul.websites {
   ul.websites > li {
     display: inline-block;
     width: 255px;
-    height: 250px;
+    height: 260px;
     margin: 0 40px 25px 0;
     padding: 10px;
     -webkit-box-shadow: 0px 0px 5px #333333;
@@ -273,8 +273,55 @@ ul.websites {
     ul.websites > li > .info {
       margin: 0;
       color: #999;
-      font-style: italic; }
+      font-style: italic;
+      height: 40px; }
     ul.websites > li > img {
       margin: 5px 0; }
     ul.websites > li > a {
       text-decoration: none; }
+
+ul.messages {
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style-type: none; }
+  ul.messages .info, ul.messages .error, ul.messages .success, ul.messages .warning {
+    padding: 8px 15px; }
+  ul.messages .info {
+    background: #F2F7FF;
+    color: #84B0F6; }
+  ul.messages .error {
+    background: #FCE2E2;
+    color: #F66; }
+  ul.messages .success {
+    background: #F2FEF2;
+    color: #7FBA7F; }
+  ul.messages .warning {
+    background: #FFF0D2;
+    color: #F93; }
+
+body.error > #content {
+  background: none no-repeat center 100px;
+  min-height: 400px;
+  padding-bottom: 100px;
+  margin-bottom: 30px; }
+  body.error > #content h1 {
+    font-size: 3em;
+    text-transform: uppercase;
+    margin: 0; }
+  body.error > #content h2 {
+    font-size: 3em;
+    text-transform: uppercase; }
+  body.error > #content a {
+    background: #29abe2;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 1.3em; }
+  body.error > #content a:before {
+    content: "> "; }
+
+body.error404 > #content {
+  background-image: url("../img/error404.png"); }
+
+body.error500 > #content {
+  background-image: url("../img/error500.png"); }

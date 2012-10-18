@@ -4,12 +4,12 @@ from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+from django import views as django_views
 
 from generic import views as generic_views
 from pages import views as pages_views
 from websites import views as websites_views
 from registration.backends.default import urls as registration_urls
-from django import views as django_views
 from imagefit import urls as imagefit_urls
 
 admin.autodiscover()
@@ -19,9 +19,6 @@ urlpatterns = i18n_patterns('',
         name='homepage'),
     url(r'^i18n/(?P<lang>[a-z]{2,})/$', generic_views.change_language,
         name='change_language'),
-
-    # admin
-    url(r'^admin/', include(admin.site.urls)),
 
     # contact
     url(r'^contact/$', pages_views.contact,
@@ -34,8 +31,6 @@ urlpatterns = i18n_patterns('',
         name='websites_index'),
     url(r'^proposer-un-site/$', websites_views.suggest,
         name='suggest_website'),
-    url(r'^proposer-un-site/merci/$', websites_views.confirm_suggest,
-        name='confirm_suggest_website'),
     url(r'^informations-sur-un-site/$', websites_views.informations,
         name='informations_website'),
 
@@ -49,14 +44,17 @@ urlpatterns = i18n_patterns('',
 
 # non i18 urls
 urlpatterns += patterns('',
+    # errors
+    url(r'^404/', django_views.generic.simple.direct_to_template, {'template': '404.html'}),
+    url(r'^500/', django_views.generic.simple.direct_to_template, {'template': '500.html'}),
     # imagefit
     url(r'^imagefit/', include(imagefit_urls)),
-
+    # admin
+    url(r'^admin/', include(admin.site.urls)),
     # static files
     url(r'^static/(?P<path>.*)$', django_views.static.serve, {
            'document_root': settings.STATIC_ROOT,
        }),
-
     # media files
     url(r'^media/(?P<path>.*)$', django_views.static.serve, {
            'document_root': settings.MEDIA_ROOT,

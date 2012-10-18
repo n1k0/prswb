@@ -1,20 +1,33 @@
 {% extends "layout.html" %}
 {% load i18n %}
 {% block meta_title %}{% trans "Suggest a website" %}{% endblock %}
-{% block meta_description %}{% trans "Suggest a website to share your experience of it as a user." %}{% endblock %}
+{% block meta_description %}{% trans "Suggest a site to the community to share your experience on this website." %} {% trans "How? Leave a comment to tell us what you think, point out issues you would met on the website and propose new features or enhancements to improve user experience on it." %}{% endblock %}
 
 {% block content %}
-    <section class="clearfix container main-container">
-        <h1>{% trans "Suggest a website" %}</h1>
-        <p>{% trans "Suggest a website to be reviewed by the UXperiment community." %}</p>
-        <p>{% trans "How? Just tell about what you're thinking of the website with a comment, raise any problem you encountered with it or  suggest how it could be improved for a better user experience." %}</p>
-        {% if errors %}
-            <p class="error">{% trans "Please correct the errors highlighted below." %}</p>
-        {% endif %}
-        <form method="post" action="." enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="{% trans "Suggest this website" %}" />
-        </form>
-    </section>
+    <h1>{% trans "Suggest a website" %}</h1>
+    <p>{% trans "Suggest a site to the community to share your experience on this website." %}</p>
+    <p>{% trans "How? Leave a comment to tell us what you think, point out issues you would met on the website and propose new features or enhancements to improve user experience on it." %}</p>
+    {% if errors %}
+        <p class="error">{% trans "Please correct the errors highlighted below." %}</p>
+    {% endif %}
+    <form method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.url.errors }}
+        <p> <label for="id_url">{% trans "Website address (URL)" %} *</label>
+        {{ form.url }}</p>
+
+        {{ form.title.errors }}
+        <p> <label for="id_title">{% trans "Site name" %} *</label>
+        {{ form.title }}</p>
+
+        {{ form.description.errors }}
+        <p> <label for="id_description">{% trans "Site description" %} *</label>
+        {{ form.description }}</p>
+
+        {{ form.request_type.errors }}
+        <p> <label for="id_request_type">{% trans "Request type" %} *</label>
+        {{ form.request_type }}</p>
+
+        <input type="submit" value="{% trans "Suggest this website" %}" />
+    </form>
 {% endblock %}
